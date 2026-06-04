@@ -49,8 +49,9 @@ export async function redisConnectionTest(
 ): Promise<INodeCredentialTestResult> {
 	const credentials = credential.data as ICredentialDataDecryptedObject;
 
+	let client;
 	try {
-		const client = setupRedisClient(credentials);
+		client = setupRedisClient(credentials);
 		await client.ping();
 		return {
 			status: 'OK',
@@ -61,5 +62,10 @@ export async function redisConnectionTest(
 			status: 'Error',
 			message: error.message,
 		};
+	} finally {
+		// Vždy uzavřeme klienta po testu — bez toho dochází k resource leaku
+		if (client) {
+			client.disconnect();
+		}
 	}
 }

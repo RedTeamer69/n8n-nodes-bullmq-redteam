@@ -199,8 +199,7 @@ export class BullmqRespond implements INodeType {
 							const queue = await getQueue.call(this, queueName, { connection });
 
 							const cleanup = async () => {
-								queue.close();
-								queue.disconnect();
+								await queue.close();
 							}
 
 							const job = await queue.getJob(jobId);

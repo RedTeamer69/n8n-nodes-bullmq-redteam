@@ -16,6 +16,9 @@ export function setupRedisClient(credentials: ICredentialDataDecryptedObject): R
 		db: credentials.database as number,
 		password: (credentials.password as string) || undefined,
 		maxRetriesPerRequest: null,
+		// Příkazy se nehromadí při výpadku Redis — rychlé selhání místo tichého čekání
+		enableOfflineQueue: false,
+		connectTimeout: 5000,
 	};
 
 	const connection = new IORedis(redisOptions);

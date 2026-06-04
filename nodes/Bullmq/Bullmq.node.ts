@@ -324,8 +324,7 @@ export class Bullmq implements INodeType {
 
 					const cleanup = async () => {
 						try {
-							queue.close();
-							queue.disconnect();
+							await queue.close();
 						} catch (error) {
 							// @ts-ignore
 							console.log(error);
@@ -359,8 +358,7 @@ export class Bullmq implements INodeType {
 
 						const cleanupQueueEvents = async () => {
 							try {
-								queueEvents.close();
-								queueEvents.disconnect();
+								await queueEvents.close();
 							} catch (error) {
 								// @ts-ignore
 								console.log(error);
@@ -414,7 +412,8 @@ export class Bullmq implements INodeType {
 					};
 					returnItems.push(items[itemIndex]);
 				} else {
-					throw new NodeOperationError(this.getNode(), `The operation "${error.message}" is not supported!`, { itemIndex });
+					if (error instanceof NodeOperationError) throw error;
+					throw new NodeOperationError(this.getNode(), error, { itemIndex });
 				}
 			}
 

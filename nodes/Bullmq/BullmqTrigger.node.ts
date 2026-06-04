@@ -230,8 +230,7 @@ export class BullmqTrigger implements INodeType {
 		if (this.getMode() === 'trigger') {
 			worker = createWorker(
 				queueName,
-				// @ts-ignore
-				async (job: Job, token: ?string) => {
+				async (job: Job, token?: string) => {
 					const donePromise =
 						respondType === 'useLastNode'
 							? await this.helpers.createDeferredPromise<IRun>()
