@@ -69,8 +69,27 @@ export class Bullmq implements INodeType {
 						description: 'Add a job to a queue',
 						action: 'Add a job',
 					},
+					{
+						name: 'Get Queue Status',
+						value: 'getQueueStatus',
+						description: 'Get job counts and status of a queue',
+						action: 'Get queue status',
+					},
 				],
 				default: 'add',
+			},
+			{
+				displayName: 'Queue Name',
+				name: 'statusQueueName',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['getQueueStatus'],
+					},
+				},
+				default: '',
+				required: true,
+				description: 'Name of the queue to get status for',
 			},
 			{
 				displayName: "Queue Source",
@@ -289,7 +308,30 @@ export class Bullmq implements INodeType {
 			const item: INodeExecutionData = { json: {}, pairedItem: { item: itemIndex } };
 
 			try {
-				if (operation === 'add') {
+				if (operation === 'getQueueStatus') {
+
+					const queueName = this.getNodeParameter('statusQueueName', itemIndex) as string;
+					const queue = await getQueue.call(this, queueName, { connection });
+
+					try {
+						const [counts, isPaused] = await Promise.all([
+							queue.getJobCounts('waiting', 'active', 'completed', 'failed', 'delayed', 'paused', 'prioritized'),
+							queue.isPaused(),
+						]);
+
+						item.json = {
+							queue: queueName,
+							isPaused,
+							counts,
+							total: Object.values(counts).reduce((sum, n) => sum + n, 0),
+						};
+					} finally {
+						await queue.close();
+					}
+
+					returnItems.push({ ...item, pairedItem: { item: itemIndex } });
+
+				} else if (operation === 'add') {
 
 					const workflowInfo = await getWorkflowInfo.call(this, source, itemIndex);
 
@@ -400,8 +442,8 @@ export class Bullmq implements INodeType {
 
 					cleanup();
 				} else {
-					throw new NodeOperationError(this.getNode(), `The operation "${operation}" is not supported!`, { itemIndex });
-				};
+					throw new NodeOperationError(this.getNode(), `Operace "${operation}" není podporována.`, { itemIndex });
+				}
 
 			} catch (error) {
 				if (this.continueOnFail()) {
