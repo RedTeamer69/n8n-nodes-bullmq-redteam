@@ -79,8 +79,7 @@ export class BullmqTrigger implements INodeType {
 				name: 'jobName',
 				type: 'string',
 				default: '',
-				required: true,
-				description: 'Job name to publish',
+				description: 'Informační pole — worker zpracovává všechny joby z fronty bez ohledu na název',
 			},
 			{
 				displayName: 'Respond Type',
