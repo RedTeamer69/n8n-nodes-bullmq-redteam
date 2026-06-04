@@ -200,7 +200,7 @@ class BullmqTrigger {
                 if (!donePromise) {
                     throw new n8n_workflow_1.NodeOperationError(this.getNode(), 'Done promise is missing');
                 }
-                const result = await donePromise.promise();
+                const result = await donePromise.promise;
                 const lastNodeResult = result.data.resultData;
                 const executionStatus = result.status;
                 job.log(`Job is about to be released, executionId ${this.getExecutionId()}, status ${executionStatus}`);

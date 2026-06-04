@@ -268,7 +268,9 @@ export class BullmqTrigger implements INodeType {
 						throw new NodeOperationError(this.getNode(), 'Done promise is missing');
 					}
 
-					const result = await donePromise.promise();
+					// donePromise.promise je v novejsim n8n Promise (property), ne funkce
+					// @ts-ignore — typ v devDependencies je stary, runtime API je spravne
+					const result = await donePromise.promise as IRun;
 
 					// parse error
 					const lastNodeResult = result.data.resultData;
