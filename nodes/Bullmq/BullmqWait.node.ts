@@ -94,8 +94,8 @@ const webhookPath = 'bullmq-wait';
 
 export class BullmqWait implements Node {
 	description: INodeTypeDescription = {
-		displayName: 'Wait for Job',
-		name: 'bullmqWait',
+		displayName: 'BullMQ Wait (RedTeam)',
+		name: 'bullmqWaitRedteam',
 		// eslint-disable-next-line n8n-nodes-base/node-class-description-icon-not-svg
 		icon: 'file:bullmq.svg',
 		group: ['input'],

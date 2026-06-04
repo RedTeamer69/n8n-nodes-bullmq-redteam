@@ -7,8 +7,8 @@ const GenericFuntions_1 = require("./GenericFuntions");
 class BullmqRespond {
     constructor() {
         this.description = {
-            displayName: 'BullMQ Respond',
-            name: 'bullmqRespond',
+            displayName: 'BullMQ Respond (RedTeam)',
+            name: 'bullmqRespondRedteam',
             icon: 'file:bullmq.svg',
             group: ['output'],
             version: 1,

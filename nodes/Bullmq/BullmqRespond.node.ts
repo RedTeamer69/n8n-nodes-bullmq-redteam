@@ -16,8 +16,8 @@ import { getQueue, redisConnectionTest } from './GenericFuntions';
 
 export class BullmqRespond implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'BullMQ Respond',
-		name: 'bullmqRespond',
+		displayName: 'BullMQ Respond (RedTeam)',
+		name: 'bullmqRespondRedteam',
 		// eslint-disable-next-line n8n-nodes-base/node-class-description-icon-not-svg
 		icon: 'file:bullmq.svg',
 		group: ['output'],

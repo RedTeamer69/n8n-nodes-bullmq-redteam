@@ -36,8 +36,8 @@ type INodeParameters = {
 };
 export class Bullmq implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'BullMQ',
-		name: 'bullmq',
+		displayName: 'BullMQ (RedTeam)',
+		name: 'bullmqRedteam',
 		// eslint-disable-next-line n8n-nodes-base/node-class-description-icon-not-svg
 		icon: 'file:bullmq.svg',
 		group: ['input'],

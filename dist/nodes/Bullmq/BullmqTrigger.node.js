@@ -8,8 +8,8 @@ const GenericFuntions_1 = require("./GenericFuntions");
 class BullmqTrigger {
     constructor() {
         this.description = {
-            displayName: 'BullMQ Trigger',
-            name: 'bullmqTrigger',
+            displayName: 'BullMQ Trigger (RedTeam)',
+            name: 'bullmqTriggerRedteam',
             icon: 'file:bullmq.svg',
             group: ['trigger'],
             version: 1,

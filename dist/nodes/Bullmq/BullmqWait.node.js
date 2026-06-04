@@ -51,8 +51,8 @@ const webhookPath = 'bullmq-wait';
 class BullmqWait {
     constructor() {
         this.description = {
-            displayName: 'Wait for Job',
-            name: 'bullmqWait',
+            displayName: 'BullMQ Wait (RedTeam)',
+            name: 'bullmqWaitRedteam',
             icon: 'file:bullmq.svg',
             group: ['input'],
             version: 1,
